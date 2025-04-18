@@ -70,6 +70,9 @@ public class EmailGeneratorService {
         if(emailRequest.getTone() != null && !emailRequest.getTone().isEmpty()){
             prompt.append("Use a ").append(emailRequest.getTone()).append(" tone. ");
         }
+        if(emailRequest.getType() != null && !emailRequest.getType().isEmpty()){
+            prompt.append("The reply should convey a ").append(emailRequest.getType()).append(" sentiment. ");
+        }
         prompt.append("\nOriginal email: \n").append(emailRequest.getEmailContent());
 
         return  prompt.toString();

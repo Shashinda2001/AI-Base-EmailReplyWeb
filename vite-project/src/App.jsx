@@ -18,6 +18,7 @@ import axios from 'axios';
 function App() {
   const [emailContent, setEmailContent] = useState('');
   const [tone, setTone] = useState('');
+  const [type, setType] = useState('');
   const [generatedReply, setGeneratedReply] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -29,6 +30,7 @@ function App() {
       const response = await axios.post('http://localhost:8080/api/email/generate', {
         emailContent,
         tone,
+        type
       });
       setGeneratedReply(typeof response.data === 'string' ? response.data : JSON.stringify(response.data));
     } catch (error) {
@@ -86,19 +88,36 @@ function App() {
             onChange={(e) => setEmailContent(e.target.value)}
           />
 
-          <FormControl fullWidth sx={{ mb: 3 }}>
-            <InputLabel>Tone (Optional)</InputLabel>
-            <Select
-              value={tone}
-              label="Tone (Optional)"
-              onChange={(e) => setTone(e.target.value)}
-            >
-              <MenuItem value="">None</MenuItem>
-              <MenuItem value="professional">Professional</MenuItem>
-              <MenuItem value="casual">Casual</MenuItem>
-              <MenuItem value="friendly">Friendly</MenuItem>
-            </Select>
-          </FormControl>
+<Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+  <FormControl sx={{ flex: 1 }}>
+    <InputLabel>Tone (Optional)</InputLabel>
+    <Select
+      value={tone}
+      label="Tone (Optional)"
+      onChange={(e) => setTone(e.target.value)}
+    >
+      <MenuItem value="">None</MenuItem>
+      <MenuItem value="professional">Professional</MenuItem>
+      <MenuItem value="casual">Casual</MenuItem>
+      <MenuItem value="friendly">Friendly</MenuItem>
+    </Select>
+  </FormControl>
+
+  <FormControl sx={{ flex: 1 }}>
+    <InputLabel>Type (Optional)</InputLabel>
+    <Select
+      value={type}
+      label="Type (Optional)"
+      onChange={(e) => setType(e.target.value)} // corrected setTone ➝ setType
+    >
+      <MenuItem value="">None</MenuItem>
+      <MenuItem value="positive">Positive</MenuItem>
+      <MenuItem value="negative">Negative</MenuItem>
+      <MenuItem value="neutral">Neutral</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+
 
           <Button
             variant="contained"
