@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "AI Email Reply",
+    "version": "1.0",
+    "description": "A Chrome extension to assist with AI-generated email replies.",
+    "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": [
+        "http://localhost:8080/*",
+        "*://mail.google.com/*"],
+    "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": [ "*://mail.google.com/*"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["*://mail.google.com/*"]
+    }
+  ],
+    "action": {
+        "default_title": "Email Writer assistant",
+         "default_icon": "iconApp.png"
+    }
+     
+}
